@@ -5,10 +5,10 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
+import tagProBot.SampleChaserBot;
+import tagProBot.SampleRunnerBot;
+import tagProBot.TagProBot;
 import utils.Pr;
-import TagProBot.SampleChaserBot;
-import TagProBot.SampleRunnerBot;
-import TagProBot.TagProBot;
 import animate.AbstractAnimation;
 
 /**

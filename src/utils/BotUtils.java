@@ -1,8 +1,8 @@
 package utils;
 
+import tagProBot.SampleChaserBot;
+import tagProBot.TagProBot;
 import tagpro.Ball;
-import TagProBot.SampleChaserBot;
-import TagProBot.TagProBot;
 
 
 /**

@@ -1,4 +1,4 @@
-package TagProBot;
+package tagProBot;
 
 import tagpro.Ball;
 
