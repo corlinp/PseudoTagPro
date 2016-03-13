@@ -50,45 +50,49 @@ public class TagPro {
 			g.fillRect(0,0,getWidth(),getHeight());
 			g.setColor(Color.WHITE);
 			g.fill(arena);
+			double[] moveRunner = new double[2];
+			double[] moveChaser = new double[2];
+			
 			if(runnerBot == null){
 				if(wasd[0]){
-					runnerBall.moveY(-1);
+					moveRunner[1]+=(-1);
 				}
 				if(wasd[1]){
-					runnerBall.moveX(-1);
+					moveRunner[0]+=(-1);
 				}
 				if(wasd[2]){
-					runnerBall.moveY(1);
+					moveRunner[1]+=(1);
 				}
 				if(wasd[3]){
-					runnerBall.moveX(1);
+					moveRunner[0]+=(1);
 				}
 			}
-			if(chaserBot == null){
+			else{
+				moveRunner = runnerBot.move(runnerBall, chaserBall);
+			}
+			if(chaserBot == null && frame > 60){
 				if(wasd[4]){
-					chaserBall.moveY(-1);
+					moveChaser[1]+=(-1);
 				}
 				if(wasd[5]){
-					chaserBall.moveX(-1);
+					moveChaser[0]+=(-1);
 				}
 				if(wasd[6]){
-					chaserBall.moveY(1);
+					moveChaser[1]+=(1);
 				}
 				if(wasd[7]){
-					chaserBall.moveX(1);
+					moveChaser[0]+=(1);
 				}
 			}
+			else if(frame > 60){
+				moveChaser = chaserBot.move(chaserBall, runnerBall);
+			}
 
-			if(runnerBot != null){
-				double[] move = runnerBot.move(runnerBall, chaserBall);
-				runnerBall.moveX(move[0]);
-				runnerBall.moveY(move[1]);
-			}
-			if(chaserBot != null && frame > 0){
-				double[] move = chaserBot.move(chaserBall, runnerBall);
-				chaserBall.moveX(move[0]);
-				chaserBall.moveY(move[1]);
-			}
+			
+			runnerBall.moveX(moveRunner[0]);
+			runnerBall.moveY(moveRunner[1]);
+			chaserBall.moveX(moveChaser[0]);
+			chaserBall.moveY(moveChaser[1]);
 
 			chaserBall.calculate();
 			runnerBall.calculate();
@@ -102,6 +106,7 @@ public class TagPro {
 			chaserBall.paint(g);
 		}
 		public void spaceAction(){
+			reset();
 			TagPro.this.reset();
 		}
 		public void mouseAction(MouseEvent e){
