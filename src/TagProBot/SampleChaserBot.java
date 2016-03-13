@@ -12,7 +12,7 @@ public class SampleChaserBot implements TagProBot{
 		double xvec = foe.getX() - me.getX();
 		double yvec = foe.getY() - me.getY();
 		//finds the magnitude of the position between the two bots
-		double mag = Math.sqrt(xvec*xvec + yvec*yvec)*0.70;
+		double mag = Math.sqrt(xvec*xvec + yvec*yvec);
 		//normalizes the vector to the other bot's position.
 		//note that the max x and y values are 1.
 		double uvx = xvec/mag;

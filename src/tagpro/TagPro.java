@@ -12,25 +12,30 @@ import TagProBot.TagProBot;
 import animate.AbstractAnimation;
 
 /**
- * Extensible Specifications:
+ * TagPro Main Class. This runs TagPro!
  * 
- * An abstract "AI" class
+ * All you have to do is change which bots are passed to a 
+ * TagPro instance in the main method down there.
  * 
- * 
+ * @author 420NoScopeXx
  */
 public class TagPro {
+	//Here are some instance variables for map size, ball size, etc.
 	static final double timeStep = 0.75;
 	static final double maxSpeed = 14.0;
 	static final int ballDiameter = 75;
 	static final int arenaDiameter = 800;
 	static final double chaserSpeedMultiplier = 1.0;
+	static final double runnerSpeedMultiplier = 1.0;
 	
-	
+	//This is the main method. Change the runner and chaser bots.
+	//If a bot it null you'll be able to control it 
+	//      using arrow keys (chaser) or WASD (runner)
 	public static void main(String[] args) {
 		TagProBot runner = null;
 		runner = new SampleRunnerBot();
 		TagProBot chaser = null;
-		//chaser = new SampleChaserBot();
+		chaser = new SampleChaserBot();
 		new TagPro(runner, chaser);
 	}
 
@@ -131,9 +136,11 @@ public class TagPro {
 		//myBall = new Ball(rand.nextInt(windowSize-200)+100,rand.nextInt(windowSize-200)+100);
 		runnerBall = new Ball(0,0);
 		runnerBall.color = Color.RED;
+		runnerBall.multiplier = runnerSpeedMultiplier;
 		double deg = rand.nextInt(360)/(2*Math.PI);
 		chaserBall = new Ball(Math.sin(deg)*(arenaDiameter/2-ballDiameter/2-5),Math.cos(deg)*(arenaDiameter/2-ballDiameter/2-5));
 		chaserBall.color = Color.BLUE;
+		chaserBall.multiplier = chaserSpeedMultiplier;
 	}
 
 	private boolean collisions(){
