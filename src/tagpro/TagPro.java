@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
+import tagProBot.CleanPredChaserBot;
 import tagProBot.SampleChaserBot;
 import tagProBot.SampleRunnerBot;
 import tagProBot.TagProBot;
@@ -35,7 +36,8 @@ public class TagPro {
 		TagProBot runner = null;
 		runner = new SampleRunnerBot();
 		TagProBot chaser = null;
-		chaser = new SampleChaserBot();
+		//chaser = new SampleChaserBot();
+		//chaser = new CleanPredChaserBot();
 		new TagPro(runner, chaser);
 	}
 
@@ -89,10 +91,8 @@ public class TagPro {
 			}
 
 			
-			runnerBall.moveX(moveRunner[0]);
-			runnerBall.moveY(moveRunner[1]);
-			chaserBall.moveX(moveChaser[0]);
-			chaserBall.moveY(moveChaser[1]);
+			runnerBall.move(moveRunner);
+			chaserBall.move(moveChaser);
 
 			chaserBall.calculate();
 			runnerBall.calculate();

@@ -73,29 +73,22 @@ public class Ball{
 		g.setColor(color);
 		g.fill(ellipse);
 	}
-	void moveX(double amount){
-		amount *= TagPro.timeStep*multiplier;
-		if(amount > TagPro.timeStep*multiplier)
-			amount = TagPro.timeStep*multiplier;
-		if(amount < -TagPro.timeStep*multiplier)
-			amount = -TagPro.timeStep*multiplier;
-		vx += amount;
-		if(vx > TagPro.maxSpeed)
-			vx = TagPro.maxSpeed;
-		if(vx < -TagPro.maxSpeed)
-			vx = -TagPro.maxSpeed;
-	}
-	void moveY(double amount){
-		amount *= TagPro.timeStep*multiplier;
-		if(amount > TagPro.timeStep*multiplier)
-			amount = TagPro.timeStep*multiplier;
-		if(amount < -TagPro.timeStep*multiplier)
-			amount = -TagPro.timeStep*multiplier;
-		vy += amount;
-		if(vy > TagPro.maxSpeed)
-			vy = TagPro.maxSpeed;
-		if(vy < -TagPro.maxSpeed)
-			vy = -TagPro.maxSpeed;
+
+	//moves the ball as an x and y acceleration vector.
+	void move(double[] move){
+		//maximum move speed is 1.
+		//This is unlike TagPro where balls move master diagonally.
+		if(BotUtils.magnitude(move)>1.0){
+			move = BotUtils.unitVector(move);
+		}
+		vx += move[0]*multiplier*TagPro.timeStep;
+		vy += move[1]*multiplier*TagPro.timeStep;
+		
+		if(getVelMagnitude()>TagPro.maxSpeed){
+			double[] toSet = BotUtils.unitVector(getVelVector());
+			vx = toSet[0]*TagPro.maxSpeed;
+			vy = toSet[1]*TagPro.maxSpeed;
+		}
 	}
 
 	public double distanceTo(Ball other){
@@ -104,3 +97,20 @@ public class Ball{
 		return Math.sqrt(xd*xd+yd*yd);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
